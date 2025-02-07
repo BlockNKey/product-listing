@@ -1,36 +1,187 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VitaliiStore made by Vitalii Prihotskiy
 
-## Getting Started
+## ✨ Key Features
 
-First, run the development server:
+### 🎯 Core Features
+
+- Responsive design for all devices (mobile, tablet, desktop)
+- Dark mode with system preference detection
+- Advanced product filtering and search
+- Real-time price range filtering
+- Stock availability tracking
+
+### 🔍 SEO & Schema Markup
+
+- Rich product schema markup for enhanced search results
+- OpenGraph meta tags for better social sharing
+- Structured data for:
+  - Product listings (price, availability, ratings)
+  - Breadcrumb navigation
+  - Organization information
+- Semantic HTML structure
+
+### ♿ Accessibility (WCAG 2.1 Compliant)
+
+- ARIA labels and landmarks
+- Keyboard navigation support
+- Focus management
+- Screen reader friendly:
+  - Descriptive alt texts
+  - Semantic headings
+  - Skip to main content
+- Color contrast compliance
+- Reduced motion support
+- Error announcements for screen readers
+
+### 🚨 Error Handling
+
+- User-friendly error messages with react-toastify
+- Comprehensive error states:
+  - Network errors with automatic retry
+  - API errors with specific messages
+  - Validation errors with clear feedback
+  - Loading states with skeleton screens
+- Offline support
+- Error boundary for component failures
+- Accessibility-friendly error notifications
+
+### 🎨 UI/UX Features
+
+- Smooth animations and transitions
+- Loading skeletons
+- Toast notifications
+- Responsive images
+- Infinite scroll with error recovery
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: TailwindCSS
+- **State Management**: React Hooks
+- **Error Handling**: react-toastify
+- **Accessibility**: ARIA
+- **Containerization**: Docker
+
+## 🚀 Quick Start
+
+### Development
+
+1. Clone and install:
+
+```bash
+git clone https://github.com/BlockNKey/product-listing.git
+cd product-listing
+npm install
+```
+
+2. Start development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Docker
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+docker-compose up -d
 
-## Learn More
+docker-compose down
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🤔 Technical Decisions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Architecture Choices
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Next.js App Router**
 
-## Deploy on Vercel
+   - Why: Better performance, built-in SSR, and improved SEO
+   - Impact: Faster page loads and better search engine visibility
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **TypeScript**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   - Why: Type safety and better developer experience
+   - Impact: Reduced runtime errors and improved maintainability
+
+3. **TailwindCSS**
+
+   - Why: Rapid development and consistent styling
+   - Impact: Reduced CSS bundle size and better responsive design
+
+4. **React-Toastify**
+   - Why: User-friendly error notifications
+   - Impact: Better error handling and user experience
+
+### Performance Optimizations
+
+1. **Image Optimization**
+
+   - Next.js Image component for automatic optimization
+   - Lazy loading for better initial page load
+
+2. **Error Handling**
+   - Comprehensive error states
+   - User-friendly error messages
+
+## 🎯 Assumptions Made
+
+1. **Data Structure**
+
+   - Products have consistent structure (id, name, price, etc.)
+   - All product images are accessible via URLs
+
+2. **User Environment**
+
+   - Modern browser support (last 2 versions)
+   - Minimum screen width of 320px
+   - Basic internet connectivity
+
+3. **Performance**
+   - Maximum of 1000 products in the list
+   - Image sizes under 5MB
+
+## 🎯 Implementation Details
+
+### Error Handling Strategy
+
+```typescript
+// Example of comprehensive error handling
+try {
+  const response = await fetch('/api/products');
+  if (!response.ok) throw response;
+  // Handle success
+} catch (error) {
+  handleApiError(error, 'Failed to load products');
+}
+```
+
+### Accessibility Implementation
+
+```typescript
+// Example of accessible component
+<button
+  onClick={handleAction}
+  aria-label="Add to cart"
+  role="button"
+  aria-busy={loading}
+  disabled={disabled}
+>
+  {loading ? 'Adding...' : 'Add to Cart'}
+</button>
+```
+
+### Schema Markup Example
+
+```typescript
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Product Name",
+    "price": "19.99",
+    "availability": "https://schema.org/InStock"
+  }
+</script>
+```
