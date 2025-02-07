@@ -1,40 +1,13 @@
-'use client';
-
-import { useState, useEffect } from "react";
 import Image from "next/image";
 
-import { Product } from "@/types";
-import ProductCard from "@/components/Product/ProductCard";
+import ProductListing from "@/components/Product/ProductListing";
+import Header from "@/components/GlobalHeader";
+import Footer from "@/components/GlobalFooter";
 
-const Home = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('/api/products');
-        const data = await response.json();
-        setProducts(data.products);
-      } catch (error) {
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchProducts();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        Loading products...
-      </div>
-    )
-  }
-
-	return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+const Home = () => (
+  <div>
+    <Header />
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen">
       <div className="text-center mb-12 animate-fade-in">
         <h1 className="text-4xl font-bold mb-8">
           Welcome to VitaliiStore
@@ -52,13 +25,10 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product: Product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      <ProductListing />
     </main>
-	);
-};
+    <Footer />
+  </div>
+);
 
 export default Home;

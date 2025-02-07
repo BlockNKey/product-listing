@@ -8,3 +8,11 @@ export interface Product {
   image: string;
   features: string[];
 }
+
+export interface ProductFilter {
+  search: string;
+  minPrice: number;
+  maxPrice: number;
+  type: string;
+  minCount: number;
+}
