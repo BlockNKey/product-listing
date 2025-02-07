@@ -19,6 +19,9 @@ export default {
           text: '#ffffff'
         }
       },
+      animation: {
+        'pulse-slow': 'pulse 3s ease-in-out infinite',
+      }
     },
   },
   plugins: [],

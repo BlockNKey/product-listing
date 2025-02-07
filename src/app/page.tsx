@@ -1,8 +1,34 @@
 import Image from "next/image";
+import { Metadata } from "next";
 
 import ProductListing from "@/components/Product/ProductListing";
 import Header from "@/components/GlobalHeader";
 import Footer from "@/components/GlobalFooter";
+
+const baseUrl=process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
+export const metadata: Metadata = {
+  title: 'Premium Products Collection | VitaliiStore',
+  description: 'Browse our curated collection of premium products. Find the best deals on electronics, fashion, and more.',
+  keywords: ['products', 'online store', 'electronics', 'fashion', 'premium products', 'shopping'],
+  authors: [{ name: 'Vitalii Prihotskiy' }],
+  creator: 'VitaliiStore',
+  publisher: 'VitaliiStore',
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-us',
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: baseUrl,
+    siteName: 'VitaliiStore',
+    title: 'VitaliiStore - Premium Products Collection',
+    description: 'Discover our premium collection of high-quality products. From electronics to fashion, find the best deals on authentic items.',
+  },
+};
 
 const Home = () => (
   <div>

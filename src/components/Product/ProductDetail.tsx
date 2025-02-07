@@ -32,7 +32,7 @@ const ProductDetail = ({id}:ProductDetailProps) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        Loading product details..
+        <div className="animate-pulse-slow">Loading product details..</div>
       </div>
     );
   }
@@ -112,6 +112,31 @@ const ProductDetail = ({id}:ProductDetailProps) => {
           </div>
         </div>
       </div>
+      {product && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Product',
+              name: product.name,
+              description: product.description,
+              image: product.image,
+              offers: {
+                '@type': 'Offer',
+                price: product.price,
+                priceCurrency: 'USD',
+                availability: product.count > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+                url: `/product/${product.id}`,
+              },
+              brand: {
+                '@type': 'Brand',
+                name: 'ProductStore',
+              },
+            }),
+          }}
+        />
+      )}
     </main>
   );
 }

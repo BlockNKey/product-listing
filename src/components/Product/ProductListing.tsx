@@ -29,7 +29,7 @@ const ProductListing = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center">
-        Loading products...
+        <div className="animate-pulse-slow">Loading product details..</div>
       </div>
     )
   }
