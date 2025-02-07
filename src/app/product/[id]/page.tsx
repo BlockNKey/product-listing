@@ -4,14 +4,8 @@ import ProductDetail from '@/components/Product/ProductDetail';
 import Header from '@/components/GlobalHeader';
 import products from '@/data/products.json'
 
-interface ProductPageProps {
-  params: {
-    id: string;
-  };
-}
-
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const { id } = await params;
+export async function generateMetadata(context: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await context.params;
   try {
     const product = products.products.find(
       (p) => p.id === parseInt(id)
@@ -23,8 +17,6 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
         description: 'The requested product could not be found.',
       };
     }
-
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
     return {
       title: product.name,
@@ -46,8 +38,8 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   }
 }
 
-const ProductPage = async ({ params }: ProductPageProps) => {
-  const { id } = await params;
+const ProductPage = async (context: { params: Promise<{ id: string }> }) => {
+  const { id } = await context.params;
 
   return (
   <div>
