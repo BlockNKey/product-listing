@@ -9,14 +9,21 @@ interface ProductCardProps {
 }
 
 const ProductCard: FC<ProductCardProps> = ({product}) => (
-  <Link href={`/product/${product.id}`} className="group bg-white dark:bg-dark-secondary rounded-lg shadow-md overflow-hidden transform transition-all duration-200 animate-fade-in">
-    <div className="aspect-w-16 aspect-h-9 relative h-48">
+  <Link href={`/product/${product.id}`} className="group bg-white dark:bg-dark-secondary rounded-lg shadow-md overflow-hidden transform transition-all duration-200 animate-fade-in" aria-labelledby={`product-${product.id}-title product-${product.id}-price`}>
+    <div className="aspect-w-16 aspect-h-9 relative h-48 overflow-hidden">
       <Image
         src={product.image}
         alt={product.name}
         fill
         className="object-cover group-hover:scale-105 transition-transform duration-200"
       />
+      {product.count === 0 && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <span className="rounded-full bg-red-500 px-3 py-1 text-sm font-semibold text-white">
+            Out of Stock
+          </span>
+        </div>
+      )}
     </div>
 
     <div className="p-4">

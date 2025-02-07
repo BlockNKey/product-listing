@@ -61,7 +61,7 @@
       "name": "Gaming Laptop",
       "price": 1499.99,
       "type": "Electronics",
-      "count": 8,
+      "count": 0,
       "description": "High-performance gaming laptop with RGB keyboard",
       "image": "/images/laptop.jpg",
       "features": [

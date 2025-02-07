@@ -1,20 +1,10 @@
-"use client";
+'use client';
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
 import { AiOutlineMoon, AiOutlineSun } from "react-icons/ai";
 
 export default function Header() {
-	const [mounted, setMounted] = useState(false);
 	const { theme, setTheme } = useTheme();
-
-	useEffect(() => {
-		setMounted(true);
-	}, []);
-
-	if (!mounted) {
-		return null;
-	}
 
 	return (
 		<header className="bg-white dark:bg-dark-primary shadow-md transition-colors duration-200">
