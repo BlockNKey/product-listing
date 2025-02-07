@@ -1,68 +1,63 @@
+'use client';
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
+import { Product } from "@/types";
+import ProductCard from "@/components/Product/ProductCard";
+
 const Home = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('/api/products');
+        const data = await response.json();
+        setProducts(data.products);
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        Loading products...
+      </div>
+    )
+  }
+
 	return (
-		<div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-			<main className="flex flex-col gap-8 row-start-2 items-center sm:items-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-				<div className="">
-					<h1>Welcome to Vitalii Store</h1>
-					<div>
-						<div>Tech stacks used:</div>
-						<div>
-							<div>nextjs</div>
-							<div>tailwind css</div>
-						</div>
-					</div>
-				</div>
-			</main>
-			<footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="/file.svg"
-						alt="File icon"
-						width={16}
-						height={16}
-					/>
-					Learn
-				</a>
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="/window.svg"
-						alt="Window icon"
-						width={16}
-						height={16}
-					/>
-					Examples
-				</a>
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="/globe.svg"
-						alt="Globe icon"
-						width={16}
-						height={16}
-					/>
-					Go to nextjs.org →
-				</a>
-			</footer>
-		</div>
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="text-center mb-12 animate-fade-in">
+        <h1 className="text-4xl font-bold mb-8">
+          Welcome to VitaliiStore
+        </h1>
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Tech Stacks Used:</h2>
+          <div className="flex justify-center">
+            <Image
+              src="https://skillicons.dev/icons?i=ts,nextjs,tailwind,docker"
+              alt="Tech Stack: TypeScript, Next.js, Tailwind CSS, Docker"
+              width={200}
+              height={50}
+              className="rounded-lg"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {products.map((product: Product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </main>
 	);
 };
 
