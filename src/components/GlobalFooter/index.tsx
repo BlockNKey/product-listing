@@ -3,7 +3,7 @@ const GlobalFooter = () =>(
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
         <div className="text-sm text-gray-500 dark:text-gray-400">
-          © {new Date().getFullYear()} VitaliiStore. All rights reserved.
+          © {new Date().getFullYear()} ProductStore. All rights reserved.
         </div>
         <div className="flex space-x-6">
           <a

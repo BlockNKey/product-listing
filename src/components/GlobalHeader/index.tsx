@@ -15,7 +15,7 @@ export default function Header() {
 							href="/"
 							className="flex items-center hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
 						>
-							<span className="text-xl font-bold">VitaliiStore</span>
+							<span className="text-xl font-bold">ProductStore</span>
 						</Link>
 					</div>
 

@@ -1,4 +1,4 @@
-# VitaliiStore made by Vitalii Prihotskiy
+# ProductStore made with 💖
 
 ## ✨ Key Features
 

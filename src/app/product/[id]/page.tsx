@@ -33,7 +33,7 @@ export async function generateMetadata(context: { params: Promise<{ id: string }
     console.error('Error generating metadata:', error);
     return {
       title: 'Product Details',
-      description: 'View product details on VitaliiStore',
+      description: 'View product details on ProductStore',
     };
   }
 }
